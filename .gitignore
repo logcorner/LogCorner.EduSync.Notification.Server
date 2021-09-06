@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/.vs/LogCorner.EduSync.Notification.Server/v16
+/src/bin/Debug
+/src/LogCorner.EduSync.SignalR.Common/bin/Debug/netstandard2.1
+/src/LogCorner.EduSync.SignalR.Common/obj
+/src/LogCorner.EduSync.SignalR.Common.IntegrationTests/bin/Debug
+/src/LogCorner.EduSync.SignalR.Common.IntegrationTests/obj
+/src/LogCorner.EduSync.SignalR.Common.UnitTests/bin/Debug
+/src/LogCorner.EduSync.SignalR.Common.UnitTests/obj
+/src/LogCorner.EduSync.SignalR.Server/bin/Debug
+/src/LogCorner.EduSync.SignalR.Server/obj
+/src/LogCorner.EduSync.SignalR.Server.IntegrationTests/bin/Debug
+/src/LogCorner.EduSync.SignalR.Server.IntegrationTests/obj
+/src/obj
