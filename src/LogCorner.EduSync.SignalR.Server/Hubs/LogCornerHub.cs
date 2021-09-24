@@ -1,5 +1,4 @@
 ﻿using LogCorner.EduSync.SignalR.Common;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Threading.Tasks;
