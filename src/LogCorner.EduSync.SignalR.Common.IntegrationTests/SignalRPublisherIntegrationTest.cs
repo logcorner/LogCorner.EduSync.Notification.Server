@@ -15,7 +15,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
 
             string topic = "test";
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
-            await hubConnectionInstance.InitAsync();
+            await hubConnectionInstance.StartAsync();
 
             ISignalRPublisher signalRPublisher = new SignalRPublisher(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
@@ -34,7 +34,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             string topic = "test";
             string payload = "payload";
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
-            await hubConnectionInstance.InitAsync();
+            await hubConnectionInstance.StartAsync();
             var mockJsonSerializer = new Mock<IJsonSerializer>();
             mockJsonSerializer.Setup(m => m.Serialize(It.IsAny<object>())).Returns("");
             ISignalRPublisher signalRPublisher = new SignalRPublisher(hubConnectionInstance, mockJsonSerializer.Object);

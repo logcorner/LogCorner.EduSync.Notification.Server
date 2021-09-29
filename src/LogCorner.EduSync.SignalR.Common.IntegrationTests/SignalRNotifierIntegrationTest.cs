@@ -13,7 +13,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             //Arrange
 
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
-            await hubConnectionInstance.InitAsync();
+            await hubConnectionInstance.StartAsync();
 
             ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
@@ -31,7 +31,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             //Arrange
 
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
-            await hubConnectionInstance.InitAsync();
+            await hubConnectionInstance.StartAsync();
 
             ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
@@ -50,7 +50,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
 
             string topic = "test";
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
-            await hubConnectionInstance.InitAsync();
+            await hubConnectionInstance.StartAsync();
 
             ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 
@@ -68,7 +68,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             //Arrange
 
             IHubInstance hubConnectionInstance = new HubConnectionInstanceMock();
-            await hubConnectionInstance.InitAsync();
+            await hubConnectionInstance.StartAsync();
 
             ISignalRNotifier signalRPublisher = new SignalRNotifier(hubConnectionInstance, It.IsAny<IJsonSerializer>());
 

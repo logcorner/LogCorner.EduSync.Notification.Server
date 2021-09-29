@@ -24,7 +24,10 @@ namespace LogCorner.EduSync.SignalR.Common
 
         public async Task StartAsync()
         {
-            await _hubInstance.Connection.StartAsync();
+            if (_hubInstance.Connection?.State != HubConnectionState.Connected)
+            {
+                await _hubInstance.StartAsync();
+            }
         }
 
         public async Task OnPublish()
@@ -47,7 +50,7 @@ namespace LogCorner.EduSync.SignalR.Common
 
         public async Task StopAsync()
         {
-            await _hubInstance.Connection.StopAsync();
+            await _hubInstance.StopAsync();
         }
     }
 }

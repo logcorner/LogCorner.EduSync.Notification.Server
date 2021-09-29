@@ -16,3 +16,5 @@
 /src/LogCorner.EduSync.SignalR.Server.IntegrationTests/bin/Debug
 /src/LogCorner.EduSync.SignalR.Server.IntegrationTests/obj
 /src/obj
+/src/.vs/LogCorner.EduSync.Notification.Server/DesignTimeBuild/.dtbcache.v2
+/src/LogCorner.EduSync.SignalR.Server/appsettings.Development.save.json

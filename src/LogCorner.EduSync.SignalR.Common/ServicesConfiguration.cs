@@ -9,11 +9,11 @@ namespace LogCorner.EduSync.SignalR.Common
         {
             services.AddSingleton<ISignalRNotifier, SignalRNotifier>();
             services.AddSingleton<ISignalRPublisher, SignalRPublisher>();
-
+            services.AddHttpContextAccessor();
             services.AddSingleton<IHubInstance, HubConnectionInstance>(ctx =>
             {
                 var hubConnectionInstance = new HubConnectionInstance(endpoint, new IdentityProvider(config));
-                hubConnectionInstance.InitConfidentialClientAsync().Wait();
+
                 return hubConnectionInstance;
             });
         }

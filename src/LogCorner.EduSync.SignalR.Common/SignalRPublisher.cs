@@ -1,43 +1,52 @@
 ﻿using LogCorner.EduSync.SignalR.Common.Model;
 using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
 {
     public class SignalRPublisher : ISignalRPublisher
     {
-        private readonly IHubInstance _hubConnectionInstance;
+        private readonly IHubInstance _hubInstance;
         private readonly IJsonSerializer _eventSerializer;
 
-        public SignalRPublisher(IHubInstance hubConnectionInstance, IJsonSerializer eventSerializer)
+        public SignalRPublisher(IHubInstance hubInstance, IJsonSerializer eventSerializer)
         {
-            _hubConnectionInstance = hubConnectionInstance;
+            _hubInstance = hubInstance;
             _eventSerializer = eventSerializer;
         }
 
         public async Task SubscribeAsync(string topic)
         {
-            if (_hubConnectionInstance.Connection.State != HubConnectionState.Connected)
+            if (_hubInstance.Connection?.State != HubConnectionState.Connected)
             {
-                await _hubConnectionInstance.StartAsync();
+                await _hubInstance.StartAsync();
             }
-            await _hubConnectionInstance.Connection.InvokeAsync(nameof(IHubInvoker<string>.Subscribe), topic);
+            await _hubInstance.Connection.InvokeAsync(nameof(IHubInvoker<string>.Subscribe), topic);
         }
 
         public async Task PublishAsync<T>(string topic, T payload)
         {
-            if (_hubConnectionInstance.Connection.State != HubConnectionState.Connected)
+            try
             {
-                await _hubConnectionInstance.StartAsync();
+                if (_hubInstance.Connection?.State != HubConnectionState.Connected)
+                {
+                    await _hubInstance.StartAsync();
+                }
+
+                var serializedBody = _eventSerializer.Serialize(payload);
+
+                var type = payload.GetType().AssemblyQualifiedName;
+                var message = new Message(type, serializedBody);
+
+                await _hubInstance.Connection.InvokeAsync(nameof(IHubInvoker<Message>.PublishToTopic), topic, message);
             }
-
-            var serializedBody = _eventSerializer.Serialize(payload);
-
-            var type = payload.GetType().AssemblyQualifiedName;
-            var message = new Message(type, serializedBody);
-
-            await _hubConnectionInstance.Connection.InvokeAsync(nameof(IHubInvoker<Message>.PublishToTopic), topic, message);
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }
