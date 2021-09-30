@@ -12,12 +12,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
     {
         public HubConnection Connection { get; private set; }
 
-        public Task<string> InitServerSideClientAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public async Task InitConfidentialClientAsync()
+        private async Task InitConfidentialClientAsync()
         {
             var webHostBuilder = new WebHostBuilder()
                 .ConfigureServices(services =>
@@ -45,6 +40,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
 
         public async Task StartAsync()
         {
+            await InitConfidentialClientAsync();
             await Connection.StartAsync();
         }
 

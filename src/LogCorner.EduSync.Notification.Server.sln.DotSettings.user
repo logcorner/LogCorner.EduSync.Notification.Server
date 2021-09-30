@@ -1,0 +1,8 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b3424276_002D0860_002D4ba9_002D8ab8_002D025940975849/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldInitHubConnectionInstance" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::37F9FB50-2FCD-49B6-BC7C-BB0E3D33E467::.NETCoreApp,Version=v5.0::LogCorner.EduSync.SignalR.Common.IntegrationTests.HubConnectionInstanceIntegrationTest&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::37F9FB50-2FCD-49B6-BC7C-BB0E3D33E467::.NETCoreApp,Version=v5.0::LogCorner.EduSync.SignalR.Common.IntegrationTests.SignalRNotifierIntegrationTest.ShouldStart&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::37F9FB50-2FCD-49B6-BC7C-BB0E3D33E467::.NETCoreApp,Version=v5.0::LogCorner.EduSync.SignalR.Common.IntegrationTests.SignalRNotifierIntegrationTest.ShouldOnPublishToTopic&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
