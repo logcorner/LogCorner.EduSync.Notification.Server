@@ -4,6 +4,6 @@ namespace LogCorner.EduSync.SignalR.Common
 {
     public interface IIdentityProvider
     {
-        Task<string> AcquireTokenForClient(string[] scopes);
+        Task<string> AcquireTokenForConfidentialClient(string[] scopes);
     }
 }

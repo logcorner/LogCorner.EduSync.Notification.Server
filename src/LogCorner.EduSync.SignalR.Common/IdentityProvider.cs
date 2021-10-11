@@ -1,30 +1,53 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Client;
+using System;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
 {
     public class IdentityProvider : IIdentityProvider
     {
-        private IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
 
         public IdentityProvider(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        public async Task<string> AcquireTokenForClient(string[] scopes)
+        public async Task<string> AcquireTokenForConfidentialClient(string[] scopes)
         {
-            //TODO : uncomment when client credential is enabled on Azure AD B2C
-            /*string clientId = _configuration["AzureAd:ClientId"];
-            string clientSecret = _configuration["AzureAd:ClientSecret"];
-            var app = ConfidentialClientApplicationBuilder.Create(clientId)
-                .WithClientSecret(clientSecret)
-                .WithAuthority(AadAuthorityAudience.AzureAdMultipleOrgs)
-                .Build();
+            string tenantId = _configuration["AzureAdConfideantialClient:TenantId"];
+            string authority = $"https://login.microsoftonline.com/{tenantId}";
 
-            var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
-            return result.AccessToken;*/
-            return await Task.FromResult("this is a fake access token");
+            string clientSecret = _configuration["AzureAdConfideantialClient:ClientSecret"];
+
+            string clientId = _configuration["AzureAdConfideantialClient:ClientId"];
+
+            var app =
+                       ConfidentialClientApplicationBuilder.Create(clientId)
+                           .WithClientSecret(clientSecret)
+                           .WithAuthority(new Uri(authority))
+                           .Build();
+
+            AuthenticationResult result;
+            try
+            {
+                result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Token acquired \n");
+                Console.ResetColor();
+            }
+            catch (MsalServiceException ex) when (ex.Message.Contains("AADSTS70011"))
+            {
+                // Invalid scope. The scope has to be of the form "https://resourceurl/.default"
+                // Mitigation: change the scope to be as expected
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Scope provided is not supported");
+                Console.ResetColor();
+                throw;
+            }
+
+            return result?.AccessToken;
         }
     }
 }

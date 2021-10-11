@@ -12,7 +12,7 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
     {
         public HubConnection Connection { get; private set; }
 
-        public async Task InitAsync()
+        private async Task InitConfidentialClientAsync()
         {
             var webHostBuilder = new WebHostBuilder()
                 .ConfigureServices(services =>
@@ -38,14 +38,15 @@ namespace LogCorner.EduSync.SignalR.Common.IntegrationTests
             await Task.CompletedTask;
         }
 
-        public Task InitConfidentialClientAsync()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public async Task StartAsync()
         {
+            await InitConfidentialClientAsync();
             await Connection.StartAsync();
+        }
+
+        public Task StopAsync()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

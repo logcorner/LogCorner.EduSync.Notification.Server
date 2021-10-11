@@ -1,5 +1,6 @@
 using LogCorner.EduSync.SignalR.Server.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -7,9 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Web;
-using System.Net;
-using System.Text.Json;
+using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Server
@@ -37,41 +36,66 @@ namespace LogCorner.EduSync.SignalR.Server
                     );
             });
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddMicrosoftIdentityWebApi(options =>
-                    {
-                        Configuration.Bind("AzureAdB2C", options);
+            services
+               .AddAuthentication()
+               .AddJwtBearer("AAD", options =>
+               {
+                   options.Authority = $"{Configuration["AzureAd:Instance"]}/{Configuration["AzureAd:TenantId"]}/v2.0";
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidIssuer = $"{Configuration["AzureAd:Instance"]}/{Configuration["AzureAd:TenantId"]}/v2.0",
+                       ValidateAudience = true,
+                       ValidAudience = Configuration["AzureAd:ClientId"],
+                       ValidateLifetime = true,
+                       NameClaimType = "name"
+                   };
+               })
 
-                        options.TokenValidationParameters.NameClaimType = "name";
-                        options.Events = new JwtBearerEvents
-                        {
-                            OnTokenValidated = context =>
-                            {
-                                return Task.CompletedTask;
-                            },
-                            OnMessageReceived = context =>
-                            {
-                                var accessToken = context.Request.Query["access_token"];
-                                var path = context.HttpContext.Request.Path;
+               .AddJwtBearer("B2C", options =>
+               {
+                   options.Authority = $"{Configuration["AzureAdB2C:Instance"]}/tfp/{Configuration["AzureAdB2C:TenantId"]}/{Configuration["AzureAdB2C:SignUpSignInPolicyId"]}/v2.0/";
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidIssuer = $"{Configuration["AzureAdB2C:Instance"]}/{Configuration["AzureAdB2C:TenantId"]}/v2.0/",
+                       ValidateAudience = true,
+                       ValidAudience = Configuration["AzureAdB2C:ClientId"],
+                       ValidateLifetime = true,
+                       NameClaimType = "name"
+                   };
+                   options.Events = new JwtBearerEvents
+                   {
+                       OnMessageReceived = context =>
+                       {
+                           var accessToken = context.Request.Query["access_token"];
 
-                                if (!string.IsNullOrEmpty(accessToken) && (path.StartsWithSegments("/logcornerhub")))
-                                {
-                                    context.Token = accessToken;
-                                }
+                           // If the request is for our hub...
+                           var path = context.HttpContext.Request.Path;
+                           if (!string.IsNullOrEmpty(accessToken) &&
+                               (path.StartsWithSegments("/logcornerhub")))
+                           {
+                               // Read the token out of the query string
+                               context.Token = accessToken;
+                           }
+                           return Task.CompletedTask;
+                       }
+                   };
+               });
+            services
+                .AddAuthorization(options =>
+                {
+                    options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .AddAuthenticationSchemes("AAD", "B2C")
+                        .Build();
 
-                                return Task.CompletedTask;
-                            },
-                            OnAuthenticationFailed = context =>
-                            {
-                                context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
-                                context.Response.ContentType = "application/json";
-                                var err = context.Exception.ToString();
-                                var result = JsonSerializer.Serialize(new { err });
-                                return context.Response.WriteAsync(err);
-                            }
-                        };
-                    },
-            options => { Configuration.Bind("AzureAdB2C", options); });
+                    options.AddPolicy("AADAdmins", new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .AddAuthenticationSchemes("AAD")
+
+                        .Build());
+                });
 
             services.AddSignalR(log =>
             {

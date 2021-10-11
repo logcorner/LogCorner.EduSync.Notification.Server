@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Common
@@ -7,40 +8,51 @@ namespace LogCorner.EduSync.SignalR.Common
     {
         private readonly IIdentityProvider _identityProvider;
 
-        private string Url { get; }
+        private readonly string _url;
         public HubConnection Connection { get; private set; }
 
         public HubConnectionInstance(string url, IIdentityProvider identityProvider)
         {
-            Url = url;
+            _url = url;
             _identityProvider = identityProvider;
-        }
-
-        public async Task InitAsync()
-        {
-            Connection = new HubConnectionBuilder()
-                .WithUrl(Url)
-                .Build();
-
-            await Task.CompletedTask;
         }
 
         public async Task StartAsync()
         {
-            await Connection.StartAsync();
+            try
+            {
+                var accessToken = await InitConfidentialClientAsync();
+
+                Connection = new HubConnectionBuilder()
+                    .WithUrl(_url, options =>
+                    {
+                        options.AccessTokenProvider = () => Task.FromResult(accessToken);
+                    })
+                    .Build();
+
+                await Connection.StartAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
-        public async Task InitConfidentialClientAsync()
+        public async Task StopAsync()
+        {
+            if (Connection != null && Connection.State != HubConnectionState.Disconnected)
+            {
+                await Connection.StopAsync();
+            }
+        }
+
+        private async Task<string> InitConfidentialClientAsync()
         {
             var scopes = new[] { "https://datasynchrob2c.onmicrosoft.com/signalr/hub/.default" };
 
-            var AccessToken = await _identityProvider.AcquireTokenForClient(scopes);
-            Connection = new HubConnectionBuilder()
-                .WithUrl(Url, options =>
-                {
-                    options.AccessTokenProvider = () => Task.FromResult(AccessToken);
-                })
-                .Build();
+            var accessToken = await _identityProvider.AcquireTokenForConfidentialClient(scopes);
+            return accessToken;
         }
     }
 }
