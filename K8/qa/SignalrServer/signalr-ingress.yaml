@@ -8,11 +8,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.org/websocket-services: "hub-notification-server-service"
-    # nginx.org/websocket-services: "hub-notification-server-service"
     nginx.ingress.kubernetes.io/affinity: cookie
-    # nginx.ingress.kubernetes.io/session-cookie-hash: sha1
-    # nginx.ingress.kubernetes.io/session-cookie-name: REALTIMESERVERID
-    # nginx.ingress.kubernetes.io/rewrite-target: /$2
 
 spec:
   tls:
@@ -30,11 +26,5 @@ spec:
                 name: hub-notification-server-service
                 port:
                   number: 80
-          # - path: /hub-notification-server(/logcornerhub/|$)(.*)
-            # pathType: Prefix
-            # backend:
-              # service:
-                # name: hub-notification-server-service
-                # port:
-                  # number: 80
+
          
