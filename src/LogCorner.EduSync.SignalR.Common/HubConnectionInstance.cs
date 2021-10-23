@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Threading.Tasks;
@@ -27,6 +28,8 @@ namespace LogCorner.EduSync.SignalR.Common
                     .WithUrl(_url, options =>
                     {
                         options.AccessTokenProvider = () => Task.FromResult(accessToken);
+                        //options.SkipNegotiation = true;
+                        //options.Transports = HttpTransportType.WebSockets;
                     })
                     .Build();
 
@@ -34,7 +37,11 @@ namespace LogCorner.EduSync.SignalR.Common
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Console.WriteLine($"HubConnectionInstance::HubUrl : {_url}");
+                Console.WriteLine($"HubConnectionInstance::Message : {e.Message}");
+                Console.WriteLine($"HubConnectionInstance::InnerException.Message : {e.InnerException?.Message}");
+                Console.WriteLine($"HubConnectionInstance::InnerException?.InnerException?.Message : {e.InnerException?.InnerException?.Message}");
+                Console.WriteLine($"HubConnectionInstance::Exception : {e}");
                 throw;
             }
         }

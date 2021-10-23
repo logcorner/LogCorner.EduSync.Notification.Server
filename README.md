@@ -1,1 +1,0 @@
-# LogCorner.EduSync.Notification.Server

@@ -5,7 +5,7 @@ services:
     image: ${DOCKER_REGISTRY-}/logcorner-edusync-signalr-server
     build:
       context: .
-      dockerfile: LogCorner.EduSync.SignalR.Server/Dockerfile
+      dockerfile: LogCorner.EduSync.Notification.Server/Dockerfile
     networks:
       - speech_network
 

@@ -9,7 +9,7 @@ metadata:
     environment: qa
 
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
   - port: 80
     targetPort: 80
@@ -22,19 +22,4 @@ spec:
   selector:
     app: hub-notification-server
     env: qa
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-    name: hub-notification-server-ingress
-spec:
-    rules:
-    - http:
-        paths:
-        - path: /notification
-          pathType: Prefix
-          backend:
-            service:
-              name: hub-notification-server-service
-              port:
-                number: 80
+

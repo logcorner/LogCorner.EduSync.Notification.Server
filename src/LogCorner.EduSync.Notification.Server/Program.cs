@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace LogCorner.EduSync.SignalR.Server
+namespace LogCorner.EduSync.Notification.Server
 {
     public class Program
     {
