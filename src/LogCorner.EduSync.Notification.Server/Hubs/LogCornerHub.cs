@@ -1,19 +1,16 @@
 ﻿using LogCorner.EduSync.SignalR.Common;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.SignalR.Server.Hubs
 {
-    [Authorize]
     public class LogCornerHub<T> : Hub<IHubNotifier<T>>, IHubInvoker<T> where T : class
     {
         private Client Client => GetClientName();
 
         public override Task OnConnectedAsync()
         {
-            
             Console.WriteLine($"OnConnectedAsync :: clientId : {Context.ConnectionId}, clientName : {Client.ClientName}, User : {Client.ConnectedUser}");
             return base.OnConnectedAsync();
         }
