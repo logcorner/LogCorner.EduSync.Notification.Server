@@ -18,3 +18,7 @@
 /src/obj
 /src/.vs/LogCorner.EduSync.Notification.Server/DesignTimeBuild/.dtbcache.v2
 /src/LogCorner.EduSync.SignalR.Server/appsettings.Development.save.json
+/src/.vs/LogCorner.EduSync.Notification.Server
+/src/LogCorner.EduSync.Notification.Server/.vs/LogCorner.EduSync.Notification.Server
+/src/LogCorner.EduSync.Notification.Server/bin/Debug/net5.0
+/src/LogCorner.EduSync.Notification.Server/obj
