@@ -1,5 +1,5 @@
-using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -28,21 +28,25 @@ namespace LogCorner.EduSync.SignalR.Common
                     .WithUrl(_url, options =>
                     {
                         options.AccessTokenProvider = () => Task.FromResult(accessToken);
-                        //options.SkipNegotiation = true;
-                        //options.Transports = HttpTransportType.WebSockets;
                     })
+                    .ConfigureLogging(logging =>
+                    {
+                        // This will set ALL logging to Debug level
+                        logging.SetMinimumLevel(LogLevel.Debug);
+                    })
+
+                   .WithAutomaticReconnect(new RandomRetryPolicy())
                     .Build();
 
                 await Connection.StartAsync();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 Console.WriteLine($"HubConnectionInstance::HubUrl : {_url}");
-                Console.WriteLine($"HubConnectionInstance::Message : {e.Message}");
-                Console.WriteLine($"HubConnectionInstance::InnerException.Message : {e.InnerException?.Message}");
-                Console.WriteLine($"HubConnectionInstance::InnerException?.InnerException?.Message : {e.InnerException?.InnerException?.Message}");
-                Console.WriteLine($"HubConnectionInstance::Exception : {e}");
-                throw;
+                Console.WriteLine($"HubConnectionInstance::Message : {ex.Message}");
+                Console.WriteLine($"HubConnectionInstance::InnerException.Message : {ex.InnerException?.Message}");
+                Console.WriteLine($"HubConnectionInstance::InnerException?.InnerException?.Message : {ex.InnerException?.InnerException?.Message}");
+                Console.WriteLine($"HubConnectionInstance::Exception : {ex}");
             }
         }
 
