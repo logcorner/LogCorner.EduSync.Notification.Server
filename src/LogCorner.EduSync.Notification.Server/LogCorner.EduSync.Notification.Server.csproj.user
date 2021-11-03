@@ -5,6 +5,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ActiveDebugProfile>LogCorner.EduSync.Notification.Server</ActiveDebugProfile>
+    <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
   <ItemGroup>
     <DevSpacesDebugProfileUserSetting Include="Bridge to Kubernetes">

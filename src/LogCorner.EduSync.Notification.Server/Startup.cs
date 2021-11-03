@@ -114,10 +114,9 @@ namespace LogCorner.EduSync.Notification.Server
             else
             {
                 app.UseHsts();
-                app.UseHttpsRedirection( );
+                app.UseHttpsRedirection();
             }
             app.UseCors("corsPolicy");
-           
 
             app.UseRouting();
 

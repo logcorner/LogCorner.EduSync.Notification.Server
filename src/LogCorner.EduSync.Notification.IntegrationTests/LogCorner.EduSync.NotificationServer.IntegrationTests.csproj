@@ -22,8 +22,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LogCorner.EduSync.SignalR.Server\LogCorner.EduSync.SignalR.Server.csproj" />
-  </ItemGroup>
-
 </Project>

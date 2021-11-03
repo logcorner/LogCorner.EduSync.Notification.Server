@@ -42,10 +42,9 @@ namespace LogCorner.EduSync.SignalR.Common
 
                 await _hubInstance.Connection.InvokeAsync(nameof(IHubInvoker<Message>.PublishToTopic), topic, message);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine(e);
-                throw;
+                Console.WriteLine(ex);
             }
         }
     }

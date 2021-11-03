@@ -8,7 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["LogCorner.EduSync.Notification.Server/LogCorner.EduSync.Notification.Server.csproj", "LogCorner.EduSync.Notification.Server/"]
-COPY ["LogCorner.EduSync.SignalR.Common/LogCorner.EduSync.SignalR.Common.csproj", "LogCorner.EduSync.SignalR.Common/"]
+COPY ["LogCorner.EduSync.Notification.Common/LogCorner.EduSync.Notification.Common.csproj", "LogCorner.EduSync.Notification.Common/"]
 RUN dotnet restore "LogCorner.EduSync.Notification.Server/LogCorner.EduSync.Notification.Server.csproj"
 COPY . .
 WORKDIR "/src/LogCorner.EduSync.Notification.Server"
