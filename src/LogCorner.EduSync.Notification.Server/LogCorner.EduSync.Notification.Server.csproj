@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LogCorner.EduSync.Notification.Common\LogCorner.EduSync.Notification.Common.csproj" />
-    <ProjectReference Include="..\LogCorner.EduSync.SignalR.Common\LogCorner.EduSync.SignalR.Common.csproj" />
   </ItemGroup>
 
 </Project>
