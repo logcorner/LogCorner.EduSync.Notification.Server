@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LogCorner.EduSync.SignalR.Common
+namespace LogCorner.EduSync.Notification.Common
 {
     public static class ServicesConfiguration
     {

@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
-namespace LogCorner.EduSync.SignalR.Server.Hubs
+namespace LogCorner.EduSync.Notification.Server.Hubs
 {
     public class Client
     {

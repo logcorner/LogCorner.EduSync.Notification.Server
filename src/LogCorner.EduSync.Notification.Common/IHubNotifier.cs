@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.SignalR.Common
+namespace LogCorner.EduSync.Notification.Common
 {
     public interface IHubNotifier<T>
     {

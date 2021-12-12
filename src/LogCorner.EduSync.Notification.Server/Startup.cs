@@ -1,4 +1,3 @@
-using LogCorner.EduSync.SignalR.Server.Hubs;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Notification.Server.Hubs;
 
 namespace LogCorner.EduSync.Notification.Server
 {

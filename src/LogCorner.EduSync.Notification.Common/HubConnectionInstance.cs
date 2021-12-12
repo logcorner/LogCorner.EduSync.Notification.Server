@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Logging;
 
-namespace LogCorner.EduSync.SignalR.Common
+namespace LogCorner.EduSync.Notification.Common
 {
     public class HubConnectionInstance : IHubInstance
     {

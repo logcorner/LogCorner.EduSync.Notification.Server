@@ -1,9 +1,9 @@
-﻿using LogCorner.EduSync.SignalR.Common;
-using Microsoft.AspNetCore.SignalR;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using LogCorner.EduSync.Notification.Common;
+using Microsoft.AspNetCore.SignalR;
 
-namespace LogCorner.EduSync.SignalR.Server.Hubs
+namespace LogCorner.EduSync.Notification.Server.Hubs
 {
     public class LogCornerHub<T> : Hub<IHubNotifier<T>>, IHubInvoker<T> where T : class
     {

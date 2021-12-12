@@ -1,8 +1,8 @@
-using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace LogCorner.EduSync.SignalR.Common.UnitTests
+namespace LogCorner.EduSync.Notification.Common.UnitTests
 {
     public class ServicesConfigurationUnitTest
     {

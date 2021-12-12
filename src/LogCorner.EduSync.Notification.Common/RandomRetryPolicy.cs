@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
-using System;
+﻿using System;
+using Microsoft.AspNetCore.SignalR.Client;
 
-namespace LogCorner.EduSync.SignalR.Common
+namespace LogCorner.EduSync.Notification.Common
 {
     public class RandomRetryPolicy : IRetryPolicy
     {

@@ -1,4 +1,4 @@
-﻿namespace LogCorner.EduSync.SignalR.Common.Model
+﻿namespace LogCorner.EduSync.Notification.Common.Model
 {
     public class Message
     {

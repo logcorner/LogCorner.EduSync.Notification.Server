@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Identity.Client;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Client;
 
-namespace LogCorner.EduSync.SignalR.Common
+namespace LogCorner.EduSync.Notification.Common
 {
     public class IdentityProvider : IIdentityProvider
     {
@@ -16,12 +16,12 @@ namespace LogCorner.EduSync.SignalR.Common
 
         public async Task<string> AcquireTokenForConfidentialClient(string[] scopes)
         {
-            string tenantId = _configuration["AzureAdConfideantialClient:TenantId"];
+            string tenantId = _configuration["AzureAdConfidentialClient:TenantId"];
             string authority = $"https://login.microsoftonline.com/{tenantId}";
 
-            string clientSecret = _configuration["AzureAdConfideantialClient:ClientSecret"];
+            string clientSecret = _configuration["AzureAdConfidentialClient:ClientSecret"];
 
-            string clientId = _configuration["AzureAdConfideantialClient:ClientId"];
+            string clientId = _configuration["AzureAdConfidentialClient:ClientId"];
 
             var app =
                        ConfidentialClientApplicationBuilder.Create(clientId)

@@ -1,10 +1,10 @@
-﻿using LogCorner.EduSync.SignalR.Common.Model;
+﻿using System;
+using System.Threading.Tasks;
+using LogCorner.EduSync.Notification.Common.Model;
 using LogCorner.EduSync.Speech.SharedKernel.Serialyser;
 using Microsoft.AspNetCore.SignalR.Client;
-using System;
-using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.SignalR.Common
+namespace LogCorner.EduSync.Notification.Common
 {
     public class SignalRPublisher : ISignalRPublisher
     {
