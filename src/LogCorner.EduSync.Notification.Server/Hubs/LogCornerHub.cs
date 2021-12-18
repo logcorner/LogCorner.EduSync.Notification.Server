@@ -11,13 +11,13 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
 
         public override Task OnConnectedAsync()
         {
-            Console.WriteLine($"OnConnectedAsync :: clientId : {Context.ConnectionId}, clientName : {Client.ClientName}, User : {Client.ConnectedUser}");
+            Console.WriteLine($"OnConnectedAsync :: clientId : {Context.ConnectionId}, clientName : {Client.ClientName}, User : {Client.ConnectedUser} - {DateTime.Now}");
             return base.OnConnectedAsync();
         }
 
         public override Task OnDisconnectedAsync(Exception exception)
         {
-            Console.WriteLine($"OnDisconnectedAsync :: clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}");
+            Console.WriteLine($"OnDisconnectedAsync :: clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}  - {DateTime.Now}");
             return base.OnDisconnectedAsync(exception);
         }
 

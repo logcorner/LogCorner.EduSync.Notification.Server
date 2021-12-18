@@ -25,10 +25,4 @@
     <ProjectReference Include="..\LogCorner.EduSync.Notification.Server\LogCorner.EduSync.Notification.Server.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="LogCorner.EduSync.Speech.SharedKernel">
-      <HintPath>..\SharedKernel\LogCorner.EduSync.Speech.SharedKernel.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
