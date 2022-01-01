@@ -2,7 +2,7 @@
 
 namespace LogCorner.EduSync.Notification.Common
 {
-    public interface IHubNotifier<T>
+    public interface IHubNotifier<in T>
     {
         Task OnPublish(T payload);
 
@@ -13,3 +13,9 @@ namespace LogCorner.EduSync.Notification.Common
         Task OnUnSubscribe(string connectionId, string topic);
     }
 }
+
+
+
+
+
+

@@ -8,7 +8,6 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
     public class LogCornerHub<T> : Hub<IHubNotifier<T>>, IHubInvoker<T> where T : class
     {
         private Client Client => GetClientName();
-
         public override Task OnConnectedAsync()
         {
             Console.WriteLine($"OnConnectedAsync :: clientId : {Context.ConnectionId}, clientName : {Client.ClientName}, User : {Client.ConnectedUser} - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
@@ -21,6 +20,13 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
             return base.OnDisconnectedAsync(exception);
         }
 
+        public async Task Subscribe(string topic)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, topic);
+            await Clients.Groups(topic).OnSubscribe(Context.ConnectionId, topic);
+            Console.WriteLine($"Subscribe :: topic : {topic} , clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}  - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
+        }
+
         public async Task Publish(T payload)
         {
             await Clients.All.OnPublish(payload);
@@ -31,13 +37,6 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
         {
             await Clients.All.OnPublish(topic, payload);
             Console.WriteLine($"PublishToTopic :: topic : {topic} , payload : {payload}, clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}  - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
-        }
-
-        public async Task Subscribe(string topic)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, topic);
-            await Clients.Groups(topic).OnSubscribe(Context.ConnectionId, topic);
-            Console.WriteLine($"Subscribe :: topic : {topic} , clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}  - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
         }
 
         public async Task UnSubscribe(string topic)
@@ -58,5 +57,7 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
             }
             return new Client(httpContext, clientName);
         }
+
+       
     }
 }
