@@ -10,12 +10,11 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
     public class LogCornerHub<T> : Hub<IHubNotifier<T>>, IHubInvoker<T> where T : class
     {
         private readonly ITraceService _traceService;
-        private readonly IConfiguration _configuration;
-
-        public LogCornerHub(ITraceService traceService, IConfiguration configuration)
+      
+        public LogCornerHub(ITraceService traceService)
         {
             _traceService = traceService;
-            _configuration = configuration;
+          
         }
 
         private Client Client => GetClientName();
@@ -40,7 +39,7 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
 
         public async Task PublishToTopic(string topic, T payload)
         {
-            using (var activity = _traceService.StartActivity(/*_configuration["OpenTelemetry:ServiceName"],*/ "PublishToTopic"))
+            using (var activity = _traceService.StartActivity( "PublishToTopic"))
             {
                 await Clients.All.OnPublish(topic, payload);
                 Console.WriteLine(

@@ -37,7 +37,7 @@
 
   <ItemGroup>
     <Reference Include="LogCorner.EduSync.Speech.Telemetry">
-      <HintPath>..\..\..\LogCorner.EduSync.Speech.ServiceBus\src\LogCorner.EduSync.Speech.Telemetry\bin\Debug\net5.0\LogCorner.EduSync.Speech.Telemetry.dll</HintPath>
+      <HintPath>..\..\..\LogCorner.EduSync.Speech.Infrastructure\src\LogCorner.EduSync.Speech.Telemetry\bin\Debug\net5.0\LogCorner.EduSync.Speech.Telemetry.dll</HintPath>
     </Reference>
   </ItemGroup>
 
