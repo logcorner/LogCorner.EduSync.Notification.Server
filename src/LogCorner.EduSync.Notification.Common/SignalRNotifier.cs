@@ -1,9 +1,9 @@
-using System;
-using System.Threading.Tasks;
 using LogCorner.EduSync.Notification.Common.Model;
 using LogCorner.EduSync.Speech.Command.SharedKernel.Events;
 using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 using Microsoft.AspNetCore.SignalR.Client;
+using System;
+using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Notification.Common
 {

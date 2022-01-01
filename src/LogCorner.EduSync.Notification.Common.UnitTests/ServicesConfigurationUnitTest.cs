@@ -1,5 +1,5 @@
-using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 using Xunit;
 
 namespace LogCorner.EduSync.Notification.Common.UnitTests

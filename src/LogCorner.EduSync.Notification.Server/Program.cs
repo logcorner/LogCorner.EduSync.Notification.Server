@@ -1,5 +1,7 @@
+using LogCorner.EduSync.Speech.Telemetry.Configuration;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace LogCorner.EduSync.Notification.Server
 {
@@ -14,6 +16,13 @@ namespace LogCorner.EduSync.Notification.Server
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureLogging((context, loggingBuilder) =>
+                    {
+                        loggingBuilder.ClearProviders();
+                        loggingBuilder.AddConsole();
+                        loggingBuilder.AddSerilog(context.Configuration);
+                        loggingBuilder.AddOpenTelemetry( context.Configuration);
+                    });
                     webBuilder.UseStartup<Startup>();
                 });
     }

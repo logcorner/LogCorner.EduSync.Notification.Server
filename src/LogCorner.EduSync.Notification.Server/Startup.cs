@@ -1,3 +1,5 @@
+using LogCorner.EduSync.Notification.Server.Hubs;
+using LogCorner.EduSync.Speech.Telemetry.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -8,7 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
-using LogCorner.EduSync.Notification.Server.Hubs;
 
 namespace LogCorner.EduSync.Notification.Server
 {
@@ -96,7 +97,7 @@ namespace LogCorner.EduSync.Notification.Server
 
                         .Build());
                 });
-
+            services.AddOpenTelemetry(Configuration);
             services.AddSignalR(log =>
             {
                 log.EnableDetailedErrors = true;

@@ -1,5 +1,7 @@
 ﻿using LogCorner.EduSync.Notification.Common;
+using LogCorner.EduSync.Speech.Telemetry;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 
@@ -7,6 +9,15 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
 {
     public class LogCornerHub<T> : Hub<IHubNotifier<T>>, IHubInvoker<T> where T : class
     {
+        private readonly ITraceService _traceService;
+        private readonly IConfiguration _configuration;
+
+        public LogCornerHub(ITraceService traceService, IConfiguration configuration)
+        {
+            _traceService = traceService;
+            _configuration = configuration;
+        }
+
         private Client Client => GetClientName();
 
         public override Task OnConnectedAsync()
@@ -29,8 +40,12 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
 
         public async Task PublishToTopic(string topic, T payload)
         {
-            await Clients.All.OnPublish(topic, payload);
-            Console.WriteLine($"PublishToTopic :: topic : {topic} , payload : {payload}, clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}  - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
+            using (var activity = _traceService.StartActivity(/*_configuration["OpenTelemetry:ServiceName"],*/ "PublishToTopic"))
+            {
+                await Clients.All.OnPublish(topic, payload);
+                Console.WriteLine(
+                    $"PublishToTopic :: topic : {topic} , payload : {payload}, clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}  - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
+            }
         }
 
         public async Task Subscribe(string topic)
