@@ -16,6 +16,12 @@ namespace LogCorner.EduSync.Notification.Common.Authentication
 
         public async Task<string> AcquireTokenForConfidentialClient(string[] scopes)
         {
+            bool.TryParse(_configuration["isAuthenticationEnabled"], out var isAuthenticationEnabled);
+            if (!isAuthenticationEnabled)
+            {
+                return string.Empty;
+            }
+
             string tenantId = _configuration["AzureAdConfidentialClient:TenantId"];
             string authority = $"https://login.microsoftonline.com/{tenantId}";
 
