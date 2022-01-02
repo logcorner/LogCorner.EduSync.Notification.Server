@@ -1,4 +1,4 @@
-﻿using LogCorner.EduSync.Notification.Common;
+﻿using LogCorner.EduSync.Notification.Common.Hub;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Threading.Tasks;
@@ -8,6 +8,7 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
     public class LogCornerHub<T> : Hub<IHubNotifier<T>>, IHubInvoker<T> where T : class
     {
         private Client Client => GetClientName();
+
         public override Task OnConnectedAsync()
         {
             Console.WriteLine($"OnConnectedAsync :: clientId : {Context.ConnectionId}, clientName : {Client.ClientName}, User : {Client.ConnectedUser} - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
@@ -57,7 +58,5 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
             }
             return new Client(httpContext, clientName);
         }
-
-       
     }
 }

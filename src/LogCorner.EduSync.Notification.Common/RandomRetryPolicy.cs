@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 
 namespace LogCorner.EduSync.Notification.Common
 {

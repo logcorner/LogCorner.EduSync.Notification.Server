@@ -1,7 +1,7 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
+using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.Notification.Common
+namespace LogCorner.EduSync.Notification.Common.Hub
 {
     public interface IHubInstance
     {

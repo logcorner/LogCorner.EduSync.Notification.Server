@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using LogCorner.EduSync.Notification.Common.Hub;
 using LogCorner.EduSync.Notification.Server.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
+using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Notification.Common.IntegrationTests
 {

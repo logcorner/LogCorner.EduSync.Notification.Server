@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
+using System;
+using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.Notification.Common
+namespace LogCorner.EduSync.Notification.Common.Authentication
 {
     public class IdentityProvider : IIdentityProvider
     {

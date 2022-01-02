@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.Notification.Common
+namespace LogCorner.EduSync.Notification.Common.Hub
 {
     public interface IHubInvoker<in T> where T : class
     {
@@ -13,7 +13,3 @@ namespace LogCorner.EduSync.Notification.Common
         Task UnSubscribe(string topic);
     }
 }
-
-
-
-

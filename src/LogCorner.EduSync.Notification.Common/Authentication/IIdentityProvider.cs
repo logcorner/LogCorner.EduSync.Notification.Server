@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.Notification.Common
+namespace LogCorner.EduSync.Notification.Common.Authentication
 {
     public interface IIdentityProvider
     {
