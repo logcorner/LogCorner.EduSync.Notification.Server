@@ -19,7 +19,6 @@
     },
     "LogCorner.EduSync.Notification.Server": {
       "commandName": "Project",
-      "launchBrowser": true,
       "launchUrl": "logcornerhub",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"

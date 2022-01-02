@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using LogCorner.EduSync.Notification.Common.Authentication;
+using LogCorner.EduSync.Notification.Common.Hub;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace LogCorner.EduSync.Notification.Common

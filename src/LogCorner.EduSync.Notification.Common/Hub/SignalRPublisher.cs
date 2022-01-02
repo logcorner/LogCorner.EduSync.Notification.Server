@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using System;
 using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.Notification.Common
+namespace LogCorner.EduSync.Notification.Common.Hub
 {
     public class SignalRPublisher : ISignalRPublisher
     {
@@ -40,7 +40,8 @@ namespace LogCorner.EduSync.Notification.Common
                 var type = payload.GetType().AssemblyQualifiedName;
                 var message = new Message(type, serializedBody);
 
-                await _hubInstance.Connection.InvokeAsync(nameof(IHubInvoker<Message>.PublishToTopic), topic, message);
+                await _hubInstance.Connection.InvokeAsync(nameof(IHubInvoker<Message>.PublishToTopic),
+                    topic, message);
             }
             catch (Exception ex)
             {

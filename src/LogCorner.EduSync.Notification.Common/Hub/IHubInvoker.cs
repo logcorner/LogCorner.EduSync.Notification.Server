@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.Notification.Common
+namespace LogCorner.EduSync.Notification.Common.Hub
 {
-    public interface IHubInvoker<T> where T : class
+    public interface IHubInvoker<in T> where T : class
     {
         Task Publish(T payload);
 

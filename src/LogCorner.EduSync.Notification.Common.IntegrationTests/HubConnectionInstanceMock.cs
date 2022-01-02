@@ -1,4 +1,5 @@
-﻿using LogCorner.EduSync.Notification.Server.Hubs;
+﻿using LogCorner.EduSync.Notification.Common.Hub;
+using LogCorner.EduSync.Notification.Server.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SignalR.Client;

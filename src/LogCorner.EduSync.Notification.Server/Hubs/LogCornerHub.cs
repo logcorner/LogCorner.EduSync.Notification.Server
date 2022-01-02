@@ -1,4 +1,5 @@
-﻿using LogCorner.EduSync.Notification.Common;
+﻿using LogCorner.EduSync.Notification.Common.Hub;
+using LogCorner.EduSync.Notification.Common;
 using LogCorner.EduSync.Speech.Telemetry;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +32,13 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
             return base.OnDisconnectedAsync(exception);
         }
 
+        public async Task Subscribe(string topic)
+        {
+            await Groups.AddToGroupAsync(Context.ConnectionId, topic);
+            await Clients.Groups(topic).OnSubscribe(Context.ConnectionId, topic);
+            Console.WriteLine($"Subscribe :: topic : {topic} , clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}  - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
+        }
+
         public async Task Publish(T payload)
         {
             await Clients.All.OnPublish(payload);
@@ -45,13 +53,6 @@ namespace LogCorner.EduSync.Notification.Server.Hubs
                 Console.WriteLine(
                     $"PublishToTopic :: topic : {topic} , payload : {payload}, clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}  - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
             }
-        }
-
-        public async Task Subscribe(string topic)
-        {
-            await Groups.AddToGroupAsync(Context.ConnectionId, topic);
-            await Clients.Groups(topic).OnSubscribe(Context.ConnectionId, topic);
-            Console.WriteLine($"Subscribe :: topic : {topic} , clientId : {Context.ConnectionId}, clientName :{Client.ClientName}, User : {Client.ConnectedUser}  - {DateTime.UtcNow:MM/dd/yyyy hh:mm:ss.fff tt}");
         }
 
         public async Task UnSubscribe(string topic)

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace LogCorner.EduSync.Notification.Common
+namespace LogCorner.EduSync.Notification.Common.Hub
 {
-    public interface IHubNotifier<T>
+    public interface IHubNotifier<in T>
     {
         Task OnPublish(T payload);
 
