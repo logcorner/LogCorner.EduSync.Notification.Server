@@ -1,0 +1,24 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/bin/Debug
+/src/LogCorner.EduSync.Notification.Common/bin/Debug
+/src/LogCorner.EduSync.Notification.Common/obj/Debug
+/src/LogCorner.EduSync.Notification.Common/obj
+/src/LogCorner.EduSync.Notification.Common.IntegrationTests/bin/Debug/net5.0
+/src/LogCorner.EduSync.Notification.Common.IntegrationTests/obj/Debug/net5.0
+/src/LogCorner.EduSync.Notification.Common.UnitTests/bin/Debug/net5.0
+/src/.vs/LogCorner.EduSync.Notification.Server/v16
+/src/.vs/LogCorner.EduSync.Notification.Server/DesignTimeBuild
+/src/LogCorner.EduSync.Notification.Common.IntegrationTests/obj
+/src/LogCorner.EduSync.Notification.Common.UnitTests/obj/Debug/net5.0
+/src/LogCorner.EduSync.Notification.IntegrationTests/bin/Debug/net5.0
+/src/LogCorner.EduSync.Notification.IntegrationTests/obj/Debug/net5.0
+/src/LogCorner.EduSync.Notification.Server/bin/Debug/net5.0
+/src/LogCorner.EduSync.Notification.Server/obj/Debug/net5.0
+/src/LogCorner.EduSync.Notification.Server/obj
+/src/obj
+/src/LogCorner.EduSync.Notification.IntegrationTests/obj
+/src/LogCorner.EduSync.Notification.Common.UnitTests/obj
+/src/.vs/LogCorner.EduSync.Notification.Server/config/applicationhost.config
