@@ -29,16 +29,16 @@ namespace LogCorner.EduSync.Notification.Server
                             .AllowAnyMethod()
                             .WithOrigins(allowedOrigins)
                             .AllowCredentials()
-                    );
+                );
             });
 
             services.AddAuthentication(Configuration);
-
+            services.AddControllers();
             services.AddSignalR(log =>
             {
                 log.EnableDetailedErrors = true;
             });
-           // services.AddControllers();
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,13 +55,19 @@ namespace LogCorner.EduSync.Notification.Server
             }
             app.UseCors("corsPolicy");
 
+            var pathBase = Configuration["pathBase"];
+            if (!string.IsNullOrWhiteSpace(pathBase))
+            {
+                app.UsePathBase(new PathString(pathBase));
+            }
+
             app.UseRouting();
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
+                endpoints.MapControllers();
                 bool.TryParse(Configuration["isAuthenticationEnabled"], out var isAuthenticationEnabled);
                 if (!isAuthenticationEnabled)
                 {
@@ -72,11 +78,7 @@ namespace LogCorner.EduSync.Notification.Server
                     endpoints.MapHub<LogCornerHub<object>>("/logcornerhub").RequireAuthorization();
                 }
             });
-            var pathBase = Configuration["pathBase"];
-            if (!string.IsNullOrWhiteSpace(pathBase))
-            {
-                app.UsePathBase(new PathString(pathBase));
-            }
+            
         }
     }
 }
