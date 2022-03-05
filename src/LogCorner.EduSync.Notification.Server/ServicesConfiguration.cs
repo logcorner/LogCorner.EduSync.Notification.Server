@@ -21,13 +21,13 @@ namespace LogCorner.EduSync.Notification.Server
                 .AddAuthentication()
                 .AddJwtBearer("AAD", options =>
                 {
-                    options.Authority = $"{configuration["AzureAd:Instance"]}/{configuration["AzureAd:TenantId"]}/v2.0";
+                    options.Authority = $"{configuration["NotificationServerAzureAd:Instance"]}/{configuration["NotificationServerAzureAd:TenantId"]}/v2.0";
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidIssuer = $"{configuration["AzureAd:Instance"]}/{configuration["AzureAd:TenantId"]}/v2.0",
+                        ValidIssuer = $"{configuration["NotificationServerAzureAd:Instance"]}/{configuration["NotificationServerAzureAd:TenantId"]}/v2.0",
                         ValidateAudience = true,
-                        ValidAudience = configuration["AzureAd:ClientId"],
+                        ValidAudience = configuration["NotificationServerAzureAd:ClientId"],
                         ValidateLifetime = true,
                         NameClaimType = "name"
                     };
@@ -35,13 +35,13 @@ namespace LogCorner.EduSync.Notification.Server
 
                 .AddJwtBearer("B2C", options =>
                 {
-                    options.Authority = $"{configuration["AzureAdB2C:Instance"]}/tfp/{configuration["AzureAdB2C:TenantId"]}/{configuration["AzureAdB2C:SignUpSignInPolicyId"]}/v2.0/";
+                    options.Authority = $"{configuration["NotificationServerAzureAdB2C:Instance"]}/tfp/{configuration["NotificationServerAzureAdB2C:TenantId"]}/{configuration["NotificationServerAzureAdB2C:SignUpSignInPolicyId"]}/v2.0/";
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
-                        ValidIssuer = $"{configuration["AzureAdB2C:Instance"]}/{configuration["AzureAdB2C:TenantId"]}/v2.0/",
+                        ValidIssuer = $"{configuration["NotificationServerAzureAdB2C:Instance"]}/{configuration["NotificationServerAzureAdB2C:TenantId"]}/v2.0/",
                         ValidateAudience = true,
-                        ValidAudience = configuration["AzureAdB2C:ClientId"],
+                        ValidAudience = configuration["NotificationServerAzureAdB2C:ClientId"],
                         ValidateLifetime = true,
                         NameClaimType = "name"
                     };

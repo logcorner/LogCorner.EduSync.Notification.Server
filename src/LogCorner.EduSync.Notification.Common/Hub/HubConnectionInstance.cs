@@ -61,9 +61,7 @@ namespace LogCorner.EduSync.Notification.Common.Hub
 
         private async Task<string> InitConfidentialClientAsync()
         {
-            var scopes = new[] { "https://datasynchrob2c.onmicrosoft.com/signalr/hub/.default" };
-
-            var accessToken = await _identityProvider.AcquireTokenForConfidentialClient(scopes);
+            var accessToken = await _identityProvider.AcquireTokenForConfidentialClient();
             return accessToken;
         }
     }

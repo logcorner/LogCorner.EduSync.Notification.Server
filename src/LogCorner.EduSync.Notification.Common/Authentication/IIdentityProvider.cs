@@ -4,6 +4,6 @@ namespace LogCorner.EduSync.Notification.Common.Authentication
 {
     public interface IIdentityProvider
     {
-        Task<string> AcquireTokenForConfidentialClient(string[] scopes);
+        Task<string> AcquireTokenForConfidentialClient();
     }
 }

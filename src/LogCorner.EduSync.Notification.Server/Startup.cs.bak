@@ -38,7 +38,7 @@ namespace LogCorner.EduSync.Notification.Server
             {
                 log.EnableDetailedErrors = true;
             });
-           // services.AddControllers();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +61,7 @@ namespace LogCorner.EduSync.Notification.Server
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
+                endpoints.MapControllers();
                 bool.TryParse(Configuration["isAuthenticationEnabled"], out var isAuthenticationEnabled);
                 if (!isAuthenticationEnabled)
                 {

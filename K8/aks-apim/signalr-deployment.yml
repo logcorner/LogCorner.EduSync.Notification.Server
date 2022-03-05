@@ -3,7 +3,7 @@ kind: Deployment
 
 metadata:
   name: hub-notification-server-deployment
-  namespace: aks
+  # namespace: aks
   labels:
     version: 1.0.0
     product: hub-notification-server
@@ -36,6 +36,6 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      imagePullSecrets:
-       - name: regsecret 
+      # imagePullSecrets:
+      #  - name: regsecret 
     

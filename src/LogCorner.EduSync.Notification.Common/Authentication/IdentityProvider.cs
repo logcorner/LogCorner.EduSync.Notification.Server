@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Notification.Common.Authentication
@@ -14,13 +15,21 @@ namespace LogCorner.EduSync.Notification.Common.Authentication
             _configuration = configuration;
         }
 
-        public async Task<string> AcquireTokenForConfidentialClient(string[] scopes)
+        public async Task<string> AcquireTokenForConfidentialClient()
         {
             bool.TryParse(_configuration["isAuthenticationEnabled"], out var isAuthenticationEnabled);
             if (!isAuthenticationEnabled)
             {
                 return string.Empty;
             }
+         
+            var domain = _configuration["AzureAdConfidentialClient:TenantName"];
+            string defaultScope = string.Empty;
+            if (!string.IsNullOrWhiteSpace(domain))
+            {
+                defaultScope = $"https://{domain}.onmicrosoft.com/signalr/hub/.default";
+            }
+            var scopes = new[] { defaultScope };
 
             string tenantId = _configuration["AzureAdConfidentialClient:TenantId"];
             string authority = $"https://login.microsoftonline.com/{tenantId}";
