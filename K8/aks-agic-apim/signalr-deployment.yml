@@ -28,7 +28,7 @@ spec:
         imagePullPolicy: Always
         env:
         - name: ASPNETCORE_ENVIRONMENT
-          value: "Kubernetes.AKS"
+          value: "Kubernetes.aks"
         ports:
         - containerPort: 80
         - containerPort: 443
@@ -36,6 +36,5 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      # imagePullSecrets:
-      #  - name: regsecret 
+    
     
