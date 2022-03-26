@@ -49,7 +49,7 @@ stages:
               azureResourceGroup: '${{ parameters.resourceGroupName }}'
               kubernetesCluster: '${{ parameters.kubernetesClusterName }}'
               command: 'apply'
-              arguments: '-f . -f CommandDatabase -f CommandApi'
+              arguments: '-f . -f ssl-cerificate '
               secretType: 'dockerRegistry'
               containerRegistryType: 'Azure Container Registry'
               workingDirectory: '$(System.DefaultWorkingDirectory)/deploy/kubernetes/aks-agic-apim'
