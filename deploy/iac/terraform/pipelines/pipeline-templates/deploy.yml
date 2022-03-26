@@ -9,8 +9,8 @@ stages:
 - stage: deploy_cluster_to_${{ parameters.workspace }}_environment 
   displayName: deploy  to ${{ parameters.workspace }} environment
   jobs:
-  - deployment: DeployTerraform
-    displayName: deploy  terraform files
+  - deployment: DeployToKubernetesCluster
+    displayName: deploy aks configuration files
     pool:
       vmImage: "ubuntu-18.04"
     
