@@ -24,11 +24,11 @@ spec:
     spec:
       containers:
       - name: signalrservice-container
-        image: logcornerhub/logcorner-edusync-notification-server
+        image: __ACR_LOGIN_SERVER__/logcorner-edusync-notification-server:__BUILD_NUMBER__
         imagePullPolicy: Always
         env:
         - name: ASPNETCORE_ENVIRONMENT
-          value: "Kubernetes.AKS"
+          value: "Kubernetes.aks"
         ports:
         - containerPort: 80
         - containerPort: 443
@@ -36,6 +36,5 @@ spec:
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
-      # imagePullSecrets:
-      #  - name: regsecret 
+    
     
