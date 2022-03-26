@@ -20,7 +20,7 @@ stages:
         BUILD_NUMBER: ${{ variables.BUILD_NUMBER }}
         ACR_NAME:  ${{ variables.ACR_NAME }}
         serviceConnectionName: ${{ variables.serviceConnectionName }}
-    - template: pipeline-templates/deploy-aks.yml
+    - template: pipeline-templates/deploy.yml
       parameters:
         BUILD_NUMBER: ${{ variables.BUILD_NUMBER }}
         ACR_LOGIN_SERVER:  ${{ variables.ACR_NAME }}.azurecr.io
