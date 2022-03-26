@@ -3,7 +3,7 @@ kind: Deployment
 
 metadata:
   name: hub-notification-server-deployment
-  #namespace: aks
+  # namespace: aks
   labels:
     version: 1.0.0
     product: hub-notification-server
@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: signalrservice-container
-        image: logcornerhub/logcorner-edusync-notification-server
+        image: locornermsacrtest.azurecr.io/logcorner-edusync-notification-server:latest
         imagePullPolicy: Always
         env:
         - name: ASPNETCORE_ENVIRONMENT
