@@ -15,24 +15,24 @@ namespace LogCorner.EduSync.Notification.Server
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, config) =>
                 {
-                    var settings = config.Build();
-                    bool.TryParse(settings["isAuthenticationEnabled"], out var isAuthenticationEnabled);
-                    if (!context.HostingEnvironment.IsDevelopment() && isAuthenticationEnabled)
-                    {
-                        // Configure Azure Key Vault Connection
-                        var uri = settings["AzureKeyVault:Uri"];
-                        var clientId = settings["AzureKeyVault:ClientId"];
-                        var clientSecret = settings["AzureKeyVault:ClientSecret"];
+                    //var settings = config.Build();
+                    //bool.TryParse(settings["isAuthenticationEnabled"], out var isAuthenticationEnabled);
+                    //if (!context.HostingEnvironment.IsDevelopment() && isAuthenticationEnabled)
+                    //{
+                    //    // Configure Azure Key Vault Connection
+                    //    var uri = settings["AzureKeyVault:Uri"];
+                    //    var clientId = settings["AzureKeyVault:ClientId"];
+                    //    var clientSecret = settings["AzureKeyVault:ClientSecret"];
 
-                        // Check, if Client ID and Client Secret credentials for a Service Principal
-                        // have been provided. If so, use them to connect, otherwise let the connection 
-                        // be done automatically in the background
-                        if (!string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret))
-                            config.AddAzureKeyVault(uri, clientId, clientSecret);
-                        else
-                            config
-                                .AddAzureKeyVault(uri);
-                    }
+                    //    // Check, if Client ID and Client Secret credentials for a Service Principal
+                    //    // have been provided. If so, use them to connect, otherwise let the connection 
+                    //    // be done automatically in the background
+                    //    if (!string.IsNullOrEmpty(clientId) && !string.IsNullOrEmpty(clientSecret))
+                    //        config.AddAzureKeyVault(uri, clientId, clientSecret);
+                    //    else
+                    //        config
+                    //            .AddAzureKeyVault(uri);
+                    //}
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
