@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: signalrservice-container
-        image: __ACR_LOGIN_SERVER__/logcorner-edusync-notification-server:__BUILD_NUMBER__
+        image: logcornerhub/logcorner-edusync-notification-server
         imagePullPolicy: Always
         env:
         - name: ASPNETCORE_ENVIRONMENT
