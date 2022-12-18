@@ -1,4 +1,6 @@
+using LogCorner.EduSync.Notification.Common.Exceptions;
 using LogCorner.EduSync.Notification.Server.Hubs;
+using LogCorner.EduSync.Speech.Telemetry.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -25,20 +27,22 @@ namespace LogCorner.EduSync.Notification.Server
                 var allowedOrigins = Configuration["allowedOrigins"]?.Split(",");
                 options.AddPolicy("corsPolicy",
                     builder =>
-                        builder.AllowAnyHeader()
-                            .AllowAnyMethod()
-                            .WithOrigins(allowedOrigins)
-                            .AllowCredentials()
-                    );
+                    {
+                        if (allowedOrigins != null)
+                            builder.AllowAnyHeader()
+                                .AllowAnyMethod()
+                                .WithOrigins(allowedOrigins)
+                                .AllowCredentials();
+                    });
             });
 
             services.AddAuthentication(Configuration);
-
+            services.AddOpenTelemetry(Configuration);
+            services.AddControllers();
             services.AddSignalR(log =>
             {
                 log.EnableDetailedErrors = true;
             });
-            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +59,12 @@ namespace LogCorner.EduSync.Notification.Server
             }
             app.UseCors("corsPolicy");
 
+            var pathBase = Configuration["pathBase"];
+            if (!string.IsNullOrWhiteSpace(pathBase))
+            {
+                app.UsePathBase(new PathString(pathBase));
+            }
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -62,7 +72,10 @@ namespace LogCorner.EduSync.Notification.Server
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                bool.TryParse(Configuration["isAuthenticationEnabled"], out var isAuthenticationEnabled);
+                if (!bool.TryParse(Configuration["isAuthenticationEnabled"], out var isAuthenticationEnabled))
+                {
+                    throw new NotificationServerException("isAuthenticationEnabled property should be configured appSettings");
+                }
                 if (!isAuthenticationEnabled)
                 {
                     endpoints.MapHub<LogCornerHub<object>>("/logcornerhub");
@@ -72,11 +85,6 @@ namespace LogCorner.EduSync.Notification.Server
                     endpoints.MapHub<LogCornerHub<object>>("/logcornerhub").RequireAuthorization();
                 }
             });
-            var pathBase = Configuration["pathBase"];
-            if (!string.IsNullOrWhiteSpace(pathBase))
-            {
-                app.UsePathBase(new PathString(pathBase));
-            }
         }
     }
 }

@@ -1,7 +1,6 @@
 using LogCorner.EduSync.Notification.Common.Authentication;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Notification.Common.Hub
@@ -13,42 +12,32 @@ namespace LogCorner.EduSync.Notification.Common.Hub
         private readonly string _url;
         public HubConnection Connection { get; private set; }
 
-        public HubConnectionInstance(string url, IIdentityProvider identityProvider)
+        private readonly IRetryPolicy _retryPolicy;
+
+        public HubConnectionInstance(string url, IIdentityProvider identityProvider, IRetryPolicy retryPolicy)
         {
             _url = url;
             _identityProvider = identityProvider;
+
+            _retryPolicy = retryPolicy;
         }
 
         public async Task StartAsync()
         {
-            try
-            {
-                var accessToken = await InitConfidentialClientAsync();
+            var accessToken = await InitConfidentialClientAsync();
 
-                Connection = new HubConnectionBuilder()
-                    .WithUrl(_url, options =>
-                    {
-                        options.AccessTokenProvider = () => Task.FromResult(accessToken);
-                    })
-                    .ConfigureLogging(logging =>
-                    {
-                        // This will set ALL logging to Debug level
-                        logging.SetMinimumLevel(LogLevel.Debug);
-                    })
+            Connection = new HubConnectionBuilder()
+                .WithUrl(_url, options => options.AccessTokenProvider = () => Task.FromResult(accessToken))
+                .ConfigureLogging(logging =>
+                {
+                    // This will set ALL logging to Debug level
+                    logging.SetMinimumLevel(LogLevel.Debug);
+                })
 
-                   .WithAutomaticReconnect(new RandomRetryPolicy())
-                    .Build();
+               .WithAutomaticReconnect(_retryPolicy)
+                .Build();
 
-                await Connection.StartAsync();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"HubConnectionInstance::HubUrl : {_url}");
-                Console.WriteLine($"HubConnectionInstance::Message : {ex.Message}");
-                Console.WriteLine($"HubConnectionInstance::InnerException.Message : {ex.InnerException?.Message}");
-                Console.WriteLine($"HubConnectionInstance::InnerException?.InnerException?.Message : {ex.InnerException?.InnerException?.Message}");
-                Console.WriteLine($"HubConnectionInstance::Exception : {ex}");
-            }
+            await Connection.StartAsync();
         }
 
         public async Task StopAsync()
@@ -61,10 +50,7 @@ namespace LogCorner.EduSync.Notification.Common.Hub
 
         private async Task<string> InitConfidentialClientAsync()
         {
-            var scopes = new[] { "https://datasynchrob2c.onmicrosoft.com/signalr/hub/.default" };
-
-            var accessToken = await _identityProvider.AcquireTokenForConfidentialClient(scopes);
-            return accessToken;
+            return await _identityProvider.AcquireTokenForConfidentialClient();
         }
     }
 }
