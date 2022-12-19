@@ -5,10 +5,10 @@ resources:
     type: git
     ref: develop
 jobs:
-- job: Job_1
-  displayName: Agent job 1
+- job: Job_Build
+  displayName: Build and Push Nuget Package
   pool: 
-    name: LOGCORNER-POOL
+    vmImage: 'windows-latest'
   steps:
   - checkout: self
   - task: DotNetCoreCLI@2
