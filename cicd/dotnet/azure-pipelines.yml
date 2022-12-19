@@ -8,7 +8,7 @@ jobs:
 - job: Job_Build
   displayName: Build and Push Nuget Package
   pool: 
-    vmImage: 'windows-latest'
+    name: LOGCORNER-POOL
   steps:
   - checkout: self
   - task: DotNetCoreCLI@2
