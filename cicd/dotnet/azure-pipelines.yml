@@ -35,7 +35,7 @@ jobs:
       versioningScheme: 'off'
   
   - task: NuGetCommand@2
-    displayName: NuGet push
+    displayName: push
     inputs:
       command: 'custom'
       arguments: 'nuget push -ApiKey nuget.org -Source $(Build.ArtifactStagingDirectory)/Nugets/*.nupkg -SkipDuplicate'
