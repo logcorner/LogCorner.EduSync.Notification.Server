@@ -44,3 +44,7 @@
 /src/LogCorner.EduSync.Notification.IntegrationTests/bin/Debug
 /src/LogCorner.EduSync.Notification.IntegrationTests/obj
 /src/LogCorner.EduSync.Notification.Common/bin/Debug
+/deploy/iac/terraform/.vs
+/src/.sonarqube
+/src/.vs/ProjectEvaluation
+/src/LogCorner.EduSync.Notification.Server/bin/Debug

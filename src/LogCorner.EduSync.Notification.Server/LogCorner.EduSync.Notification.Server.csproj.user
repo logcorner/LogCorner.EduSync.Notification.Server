@@ -10,13 +10,12 @@
   <ItemGroup>
     <DevSpacesDebugProfileUserSetting Include="Bridge to Kubernetes">
       <ClusterSource>KUBECONFIG</ClusterSource>
-      <ClusterName>docker-desktop</ClusterName>
-      <Context>docker-desktop</Context>
-      <Namespace>qa</Namespace>
+      <ClusterName>demo-apim-aks-test</ClusterName>
+      <Context>demo-apim-aks-test</Context>
+      <Namespace>aks</Namespace>
       <ServiceName>hub-notification-server-service</ServiceName>
-      <RoutingHeader>
-      </RoutingHeader>
-      <LaunchUrl>https://kubernetes.docker.com/hub-notification-server(/|$)(.*)</LaunchUrl>
+      <RoutingHeader>tocan-550d</RoutingHeader>
+      <LaunchUrl>http://tocan-550d.10.10.1.35.nip.io</LaunchUrl>
       <LocalLaunchProfile>LogCorner.EduSync.Notification.Server</LocalLaunchProfile>
     </DevSpacesDebugProfileUserSetting>
   </ItemGroup>

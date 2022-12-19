@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31702.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Notification.Server", "LogCorner.EduSync.Notification.Server\LogCorner.EduSync.Notification.Server.csproj", "{81D28FBA-31B5-4A86-A3C5-5443BE86B7CD}"
 EndProject
@@ -9,11 +9,7 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Notification.Common", "LogCorner.EduSync.Notification.Common\LogCorner.EduSync.Notification.Common.csproj", "{5C41CA8C-CFA7-4B6F-8641-7888E21B29DA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Notification.Common.IntegrationTests", "LogCorner.EduSync.Notification.Common.IntegrationTests\LogCorner.EduSync.Notification.Common.IntegrationTests.csproj", "{54D98FFE-6D9D-4F87-BD3A-C1430AF87EB5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.Notification.Common.UnitTests", "LogCorner.EduSync.Notification.Common.UnitTests\LogCorner.EduSync.Notification.Common.UnitTests.csproj", "{BA8C5495-5AB5-43CD-82BB-8699AC593BEF}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogCorner.EduSync.NotificationServer.IntegrationTests", "LogCorner.EduSync.Notification.IntegrationTests\LogCorner.EduSync.NotificationServer.IntegrationTests.csproj", "{8F913E16-07F8-480C-8F6E-B40F2046817A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +29,10 @@ Global
 		{5C41CA8C-CFA7-4B6F-8641-7888E21B29DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C41CA8C-CFA7-4B6F-8641-7888E21B29DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C41CA8C-CFA7-4B6F-8641-7888E21B29DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54D98FFE-6D9D-4F87-BD3A-C1430AF87EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54D98FFE-6D9D-4F87-BD3A-C1430AF87EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54D98FFE-6D9D-4F87-BD3A-C1430AF87EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54D98FFE-6D9D-4F87-BD3A-C1430AF87EB5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BA8C5495-5AB5-43CD-82BB-8699AC593BEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BA8C5495-5AB5-43CD-82BB-8699AC593BEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA8C5495-5AB5-43CD-82BB-8699AC593BEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA8C5495-5AB5-43CD-82BB-8699AC593BEF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F913E16-07F8-480C-8F6E-B40F2046817A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F913E16-07F8-480C-8F6E-B40F2046817A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F913E16-07F8-480C-8F6E-B40F2046817A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F913E16-07F8-480C-8F6E-B40F2046817A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,7 +1,7 @@
 ﻿using LogCorner.EduSync.Notification.Common.Model;
 using LogCorner.EduSync.Speech.Command.SharedKernel.Serialyser;
 using Microsoft.AspNetCore.SignalR.Client;
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LogCorner.EduSync.Notification.Common.Hub
@@ -26,27 +26,20 @@ namespace LogCorner.EduSync.Notification.Common.Hub
             await _hubInstance.Connection.InvokeAsync(nameof(IHubInvoker<string>.Subscribe), topic);
         }
 
-        public async Task PublishAsync<T>(string topic, T payload)
+        public async Task PublishAsync<T>(string topic, IDictionary<string, string> headers, T payload)
         {
-            try
+            if (_hubInstance.Connection?.State != HubConnectionState.Connected)
             {
-                if (_hubInstance.Connection?.State != HubConnectionState.Connected)
-                {
-                    await _hubInstance.StartAsync();
-                }
-
-                var serializedBody = _eventSerializer.Serialize(payload);
-
-                var type = payload.GetType().AssemblyQualifiedName;
-                var message = new Message(type, serializedBody);
-
-                await _hubInstance.Connection.InvokeAsync(nameof(IHubInvoker<Message>.PublishToTopic),
-                    topic, message);
+                await _hubInstance.StartAsync();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+
+            var serializedBody = _eventSerializer.Serialize(payload);
+
+            var type = payload.GetType().AssemblyQualifiedName;
+            var message = new Message(type, serializedBody);
+
+            await _hubInstance.Connection.InvokeAsync(nameof(IHubInvoker<Message>.PublishToTopic),
+                topic, headers, message);
         }
     }
 }
