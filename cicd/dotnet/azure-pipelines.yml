@@ -41,4 +41,5 @@ jobs:
       nuGetFeedType: 'external'
       publishFeedCredentials: 'nuget.org'
       allowPackageConflicts: true
-...
+    continueOnError: true
+... 
