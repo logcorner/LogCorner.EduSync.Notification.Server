@@ -33,7 +33,11 @@ jobs:
       packDirectory: '$(Build.ArtifactStagingDirectory)/Nugets'
       nobuild: true
       versioningScheme: 'off'
-  
+  - task: DotNetCoreCLI@2
+    inputs:
+      command: 'custom'
+      custom: 'nuget'
+      arguments: 'push $(Build.ArtifactStagingDirectory)/Nugets/*.nupkg -s https://api.nuget.org/v3/index.json --skip-duplicate'
   - task: NuGetCommand@2
     displayName: nuget push
     inputs:
