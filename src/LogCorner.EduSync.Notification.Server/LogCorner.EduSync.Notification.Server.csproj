@@ -55,11 +55,7 @@
     <ProjectReference Include="..\LogCorner.EduSync.Notification.Common\LogCorner.EduSync.Notification.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="LogCorner.EduSync.Speech.Telemetry">
-      <HintPath>..\BINARIES\LogCorner.EduSync.Speech.Telemetry.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+  
 
 
 
