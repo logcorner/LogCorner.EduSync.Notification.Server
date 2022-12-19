@@ -35,7 +35,7 @@ jobs:
       versioningScheme: 'off'
   
   - task: NuGetCommand@2
-    displayName: NuGet push
+    displayName: nuget push
     inputs:
       command: 'push'
       packagesToPush: '$(Build.ArtifactStagingDirectory)/Nugets/*.nupkg'
