@@ -13,7 +13,7 @@ namespace LogCorner.EduSync.Notification.Common
             services.AddSingleton<ISignalRPublisher, SignalRPublisher>();
             services.AddSingleton<IIdentityProvider, IdentityProvider>();
             services.AddSingleton<IRetryPolicy, RandomRetryPolicy>();
-            services.AddHttpContextAccessor();
+            //services.AddHttpContextAccessor();
             services.AddSingleton<IHubInstance, HubConnectionInstance>(ctx => new HubConnectionInstance(endpoint,
 
                 ctx.GetRequiredService<IIdentityProvider>(),

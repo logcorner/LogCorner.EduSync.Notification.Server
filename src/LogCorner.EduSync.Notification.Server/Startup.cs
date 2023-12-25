@@ -37,7 +37,7 @@ namespace LogCorner.EduSync.Notification.Server
             });
 
             services.AddAuthentication(Configuration);
-            services.AddOpenTelemetry(Configuration);
+            services.AddOpenTelemetryServices(Configuration);
             services.AddControllers();
             services.AddSignalR(log =>
             {
